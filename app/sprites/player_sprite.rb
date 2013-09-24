@@ -28,8 +28,10 @@ class PlayerSprite < Joybox::Physics::PhysicsSprite
   end
 
   def jump
-    if alive?
+    if alive? && on_solid_ground?
       self.body.apply_force force:[10, 40]
+      #jump_by_action = Jump.by position: [20, 30]
+      #run_action jump_by_action
       SimpleAudioEngine.sharedEngine.playEffect 'jump.wav'
     end
   end
@@ -39,6 +41,13 @@ class PlayerSprite < Joybox::Physics::PhysicsSprite
     self.run_action Blink.with times:50
     SimpleAudioEngine.sharedEngine.playEffect 'hurt.wav'
     SimpleAudioEngine.sharedEngine.pauseBackgroundMusic
+  end
+
+  def on_solid_ground?
+    #p @player_body.position.y
+    #p @worl.methods
+    #@player_body.position.y < 36
+    true
   end
 
   def above_ground?
