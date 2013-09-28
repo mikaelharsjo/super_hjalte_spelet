@@ -4,7 +4,7 @@ class AppDelegate
 
     @director = Joybox::Configuration.setup do
       director display_stats: true
-      #debug physics: [:aabb]    
+      debug physics: [:aabb]
     end
 
     @navigation_controller = UINavigationController.alloc.initWithRootViewController(@director)
@@ -13,19 +13,19 @@ class AppDelegate
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
     @window.setRootViewController(@navigation_controller)
     @window.makeKeyAndVisible
-    
+
     # preload sounds effects
     SimpleAudioEngine.sharedEngine.preloadEffect('background.mp3')
     SimpleAudioEngine.sharedEngine.preloadEffect('jump.wav')
     SimpleAudioEngine.sharedEngine.preloadEffect('hurt.wav')
-    
+
     # push the game scene onto the director
     @game_scene = GameLayer.scene
     @director << @game_scene
-    
+
     true
   end
-  
+
   def player
     @game_scene.children.getNSArray[0].player
   end

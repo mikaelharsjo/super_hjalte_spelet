@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="30" height="10" tilewidth="32" tileheight="32">
- <tileset firstgid="1" name="background" tilewidth="960" tileheight="323">
-  <image source="background.jpg" width="960" height="323"/>
- </tileset>
- <tileset firstgid="2" name="object_tiles" tilewidth="32" tileheight="32" spacing="2" margin="2">
+<map version="1.0" orientation="orthogonal" width="120" height="25" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="object_tiles" tilewidth="32" tileheight="32" spacing="2" margin="2">
   <image source="object_tiles.png" width="128" height="128"/>
  </tileset>
- <tileset firstgid="11" name="Ground" tilewidth="32" tileheight="32">
+ <tileset firstgid="10" name="Ground" tilewidth="32" tileheight="32">
   <image source="object_tiles.png" width="128" height="128"/>
  </tileset>
- <layer name="Background" width="30" height="10">
+ <tileset firstgid="26" name="sun" tilewidth="32" tileheight="32">
+  <image source="sun.png" trans="ff00ff" width="728" height="555"/>
+ </tileset>
+ <tileset firstgid="400" name="cloud1" tilewidth="32" tileheight="32">
+  <image source="cloud1.png" trans="ff00ff" width="332" height="233"/>
+ </tileset>
+ <tileset firstgid="470" name="cloud2" tilewidth="32" tileheight="32">
+  <image source="cloud2.png" trans="ff00ff" width="250" height="188"/>
+ </tileset>
+ <layer name="Sun" width="120" height="25">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjALSAOMA2QsABSgAAg==
+   eJzt0VUQVlUYhlFABQvBVrq7u7u7u7u7u7ttwgbBDpCwSBUUDFAJO0ABRQkFBWFx7cyZYRyP/8V+5qy7fXG+eZMkubLSkJZ0pCcDGclEZrKQlWxkJwc5yUVu8pCXfOSnAAWv8B9C/12FKEwRilKM4pSgJKUoTRnKUo7yVKAilahMFapSjepxHhCKrAY1qUVt6lCXetSnAQ1pRGOa0JRmNKcFLWlFa9rQNtYLQlG1oz0d6EgnOtOFrnSjOz3oSS9604e+9KM/AxjIIAbHeUAosiEMZRjDGcFIRjGaMYxlHOOZwEQmMZkpTGUa05nBzDgPCEU2i9nMYS7zmM8CFrKIxSzhHu7lPu7nAR7kIZayjOWsiPWCUFQP8wiP8hiP8wRPspJVPMVq1vA0z/Asz/E8L/AiL/Eyr8R5QCiytazjVdazgY1s4jVe5w3e5C02s4WtbGM7O3ibd3iXnXEeEIpsF+/xPrvZwwd8yEd8zF728Qmf8hn7OcBBDvE5X/AlX8V6QSiqr/mGb/mO7/mBwxzhR37iKMc4zs/8wgl+5TdOcorTnInzgFBkv/MHZznHn/zFeS7wNxcvP0zqIxlXcTXXkJwUXMt1XM8NSf+nY0L/6EZbpOQmUpGam7mFW7mN27mDO7mLu0lDWtKRngxkJBOZw74JUxZbZCUb2clBTnKRmzzkJR/5KUBBClGYIhSlGMUpQcmwb8JUyhalKUNZylGeClSkEpWpQlWqUZ0a1KQWtalDXepRP+ybMDWwRUMa0ZgmNKUZzWlBS1rRmja0pR3t6UBHOtGZLnQN+yZM3WzRnR70pBe96UNf+tGfAQxkEIMZwlCGMZwRjGQUo8O+CdMYW4xlHOOZwEQmMZkpTGUa05nBTGYxmznMZR7zWcDCsG8oFAqFQqFQKBQKhUKhf9ElmlinBA==
   </data>
  </layer>
- <layer name="Foreground" width="30" height="10" visible="0">
+ <layer name="Clouds" width="120" height="25">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFpADmgXYAFQA+PyDLMUExIX2DOUyYGDD9QYkcPj0jCbAMEAYAfLQApA==
+   eJzt1tVqBEEQRuHZ97+J+8bd3d1tk2w8gRjEIAax65wnmG6YXrY2/Ae+6ylq6qKjqLAqSkVRMUpQijKUowKVqEJ1Kt9T+nXKnGc4xwUuC2TuXFbDDmpRhzTq0YBGNKEZLY49WdnrFd+9xg1ucaf/G7Wygza0owOd6EI3etCLPseerOz1nu8+4BFPeE4wh8/NWrnruPqZaQCDGMIwRjCKMYxjwjF3yL0m6YXvvuIN7/hIMIfPzVq567gmmWkK05jBLOYwjwUsYskxd8i9JumT737hGz/4TTCHz81aueu4lplpBatYwzo2sIktbGPHMXfIvVrJ52at3HVcu8yUwR72cYAsDnGEY5zkYG7r73afm/2Pdx2qEO92ZbcQ73ZltxDvdmW3EO92ZbcQ73Zlt3y925VSSimllFJKKaWUUkopi/0BoNS8Zw==
   </data>
  </layer>
- <layer name="walls" width="212" height="20" visible="0">
+ <layer name="Ground" width="120" height="25">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAAAAAAAAeDZCQAAB
-  </data>
- </layer>
- <layer name="Ground" width="30" height="10">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjALSAAuZmFIAABlAADk=
+   eJzt1TEOgCAMBVCIg/e/sYOLIZigUaj4XtKlA0ObflIC4C35UACMI48BYpDHADHIY4AY5DHAc3K6n6vyeJza7O2j3VJUrc+3RN5bj9uc6f7P7vPuO639K2aaNzs75Y/WCaqn8n+KVqUN6oYCKw==
   </data>
  </layer>
 </map>

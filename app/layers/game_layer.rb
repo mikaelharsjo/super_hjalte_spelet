@@ -13,7 +13,7 @@ class GameLayer < Joybox::Core::Layer
     load_player
     configure_controls
     detect_collisions
-    set_background_music
+    # set_background_music
     game_loop
   end
 
@@ -25,7 +25,7 @@ class GameLayer < Joybox::Core::Layer
   end
 
   def load_background
-    @blue_sky = LayerColor.new color: "#41ab9d".to_color
+    @blue_sky = LayerColor.new color: "#b6dddc".to_color
     self << @blue_sky
   end
 
@@ -77,6 +77,7 @@ class GameLayer < Joybox::Core::Layer
 
   def create_ground_fixtures
     @walls = @tile_map.tile_layers['Ground']
+    return if @walls.nil?
     size = @walls.layerSize
 
     (0..size.height - 1).each do |y|
@@ -89,6 +90,7 @@ class GameLayer < Joybox::Core::Layer
 
   def create_walls_fixtures
     @walls = @tile_map.tile_layers['walls']
+    return if @walls.nil?
     size = @walls.layerSize
 
     (0..size.height - 1).each do |y|
@@ -101,6 +103,7 @@ class GameLayer < Joybox::Core::Layer
 
   def create_hazards_fixtures
     @hazards = @tile_map.tile_layers['hazards']
+    return if @hazards.nil?
     @hazard_tiles = []
     size = @hazards.layerSize
 
