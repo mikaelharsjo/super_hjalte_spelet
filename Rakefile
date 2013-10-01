@@ -4,7 +4,7 @@ require 'motion/project/template/ios'
 require 'joybox'
 
 Motion::Project::App.setup do |app|
-  app.name = 'Super Hjälte Spelet'
+  app.name = 'Superhjältespelet'
   app.identifier = 'S7Y8U49M75.com.mikaelharsjo.superhjaltespelet' # 'org.integrallis.ios.games.superkoalio'
   app.icons = ['icon_iphone.png', 'icon_ipad.png', 'icon_iphone_retina.png']
   app.prerendered_icon = true
