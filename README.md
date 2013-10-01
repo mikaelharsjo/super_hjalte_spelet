@@ -1,4 +1,4 @@
-SUPER HJÄLTE SPELET
+Superhjältespelet
 ===================
 
 iOS Console game built with RubyMotion, JoyBox and Leo
