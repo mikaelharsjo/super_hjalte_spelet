@@ -35,7 +35,7 @@ class GameLayer < Joybox::Core::Layer
 
   def load_player
     @player = PlayerSprite.new(@world)
-    @tile_map.add_child @player, 15
+    @tile_map.add_child @player, 25
   end
 
   def game_loop
@@ -118,8 +118,9 @@ class GameLayer < Joybox::Core::Layer
   def configure_controls
     on_touches_began do |touches, event|
       touches.each do |touch|
-        location = touch.locationInView(touch.view)
-        location.x > (Screen.width / 2) ? (@moving = true) : @player.jump
+        #location = touch.locationInView(touch.view)
+        #location.x > (Screen.width / 2) ? (@moving = true) : @player.jump
+        player.jump
       end
     end
 
@@ -142,6 +143,7 @@ class GameLayer < Joybox::Core::Layer
 
   def detect_collisions
     @world.when_collide @player do |collision_sprite, is_touching|
+      @player.on_ground = true
       #@player.die if @hazard_tiles.include?(collision_sprite)
     end
   end

@@ -1,4 +1,5 @@
 class PlayerSprite < Joybox::Physics::PhysicsSprite
+  attr_accessor :on_ground
 
   def initialize(world)
     @world = world
@@ -15,10 +16,15 @@ class PlayerSprite < Joybox::Physics::PhysicsSprite
     end
     super file_name: 'hero.png', body: @player_body
     @alive = true
+    @on_ground = true
   end
 
   def alive?
     @alive && above_ground?
+  end
+
+  def on_ground?
+    @on_ground
   end
 
   def move_forward
@@ -28,10 +34,9 @@ class PlayerSprite < Joybox::Physics::PhysicsSprite
   end
 
   def jump
-    if alive? && on_solid_ground?
+    if alive? && on_ground?
       self.body.apply_force force:[10, 40]
-      #jump_by_action = Jump.by position: [20, 30]
-      #run_action jump_by_action
+      @on_ground = false
       SimpleAudioEngine.sharedEngine.playEffect 'jump.wav'
     end
   end
@@ -41,13 +46,6 @@ class PlayerSprite < Joybox::Physics::PhysicsSprite
     self.run_action Blink.with times:50
     SimpleAudioEngine.sharedEngine.playEffect 'hurt.wav'
     SimpleAudioEngine.sharedEngine.pauseBackgroundMusic
-  end
-
-  def on_solid_ground?
-    #p @player_body.position.y
-    #p @worl.methods
-    #@player_body.position.y < 36
-    true
   end
 
   def above_ground?
