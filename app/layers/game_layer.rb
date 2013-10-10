@@ -11,6 +11,7 @@ class GameLayer < Joybox::Core::Layer
     load_tile_map
     create_fixtures
     load_player
+    load_enemies
     configure_controls
     detect_collisions
     # set_background_music
@@ -36,6 +37,13 @@ class GameLayer < Joybox::Core::Layer
   def load_player
     @player = PlayerSprite.new(@world)
     @tile_map.add_child @player, 25
+  end
+
+  def load_enemies
+    spider = SpiderSprite.new
+    @tile_map.add_child spider, 15
+    end_position = [0, 30]
+    spider.run_action Move.to position: end_position, duration: 5.0
   end
 
   def game_loop
