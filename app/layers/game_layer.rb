@@ -40,14 +40,21 @@ class GameLayer < Joybox::Core::Layer
   end
 
   def load_enemies
+    @enemies ||= Array.new
+    @enemies << load_spider
+  end
+
+  def load_spider
     spider = SpiderSprite.new
     @tile_map.add_child spider, 15
     end_position = [0, 30]
     spider.run_action Move.to position: end_position, duration: 5.0
+    spider
   end
 
   def game_loop
     schedule_update do |delta|
+      detect_enemy_collisions
       if @player.alive?
         @world.step delta: delta
         @player.move_forward if @moving
@@ -153,6 +160,14 @@ class GameLayer < Joybox::Core::Layer
     @world.when_collide @player do |collision_sprite, is_touching|
       @player.on_ground = true
       #@player.die if @hazard_tiles.include?(collision_sprite)
+    end
+  end
+
+  def detect_enemy_collisions
+    @enemies.each do |enemy|
+      if CGRectIntersectsRect(enemy.bounding_box, @player.bounding_box)
+        @player.die
+      end
     end
   end
 
