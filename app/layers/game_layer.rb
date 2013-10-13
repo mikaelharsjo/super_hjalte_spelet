@@ -21,7 +21,7 @@ class GameLayer < Joybox::Core::Layer
   private
 
   def load_tile_map
-    @tile_map = TileMap.new file_name: 'demo.tmx' #'tilemap.tmx'
+    @tile_map = TileMap.new file_name: 'demo.tmx'
     self << @tile_map
   end
 
@@ -32,6 +32,11 @@ class GameLayer < Joybox::Core::Layer
 
   def initialize_world
     @world = World.new(gravity: [0, -9.8])
+  end
+
+  def create_fixtures
+    game_fixture = GameFixture.new @world, @tile_map
+    game_fixture.create
   end
 
   def load_player
@@ -61,71 +66,6 @@ class GameLayer < Joybox::Core::Layer
         set_viewpoint_center(@player.position)
       else
         game_over
-      end
-    end
-  end
-
-  def create_fixtures
-    create_ground_fixtures
-    #create_walls_fixtures
-    #create_hazards_fixtures
-  end
-
-  def create_rectangular_fixture(layer, x, y)
-    tw = layer.tileset.tileSize.width / 4
-    th = layer.tileset.tileSize.height / 4
-
-    p = layer.positionAt [x, y]
-    x = p.x + tw + 4
-    y = p.y + th + 4
-
-    # create the body, define the shape and create the fixture
-    body = @world.new_body(
-      position: [x, y],
-      type: Body::Static) do
-        polygon_fixture box: [tw, th],
-                        density: 1.0,
-                        friction: 0.3,
-                        restitution: 0.0
-    end
-  end
-
-  def create_ground_fixtures
-    @walls = @tile_map.tile_layers['Ground']
-    return if @walls.nil?
-    size = @walls.layerSize
-
-    (0..size.height - 1).each do |y|
-      (0..size.width - 1).each do |x|
-        tile = @walls.tileAt([x, y])
-        create_rectangular_fixture(@walls, x, y) if tile
-      end
-    end
-  end
-
-  def create_walls_fixtures
-    @walls = @tile_map.tile_layers['walls']
-    return if @walls.nil?
-    size = @walls.layerSize
-
-    (0..size.height - 1).each do |y|
-      (0..size.width - 1).each do |x|
-        tile = @walls.tileAt([x, y])
-        create_rectangular_fixture(@walls, x, y) if tile
-      end
-    end
-  end
-
-  def create_hazards_fixtures
-    @hazards = @tile_map.tile_layers['hazards']
-    return if @hazards.nil?
-    @hazard_tiles = []
-    size = @hazards.layerSize
-
-    (0..size.height - 1).each do |y|
-      (0..size.width - 1).each do |x|
-        tile = @hazards.tileAt([x, y])
-        @hazard_tiles << create_rectangular_fixture(@walls, x, y) if tile
       end
     end
   end
