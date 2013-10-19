@@ -40,13 +40,19 @@ class GameLayer < Joybox::Core::Layer
   end
 
   def load_player
-    @player = PlayerSprite.new(@world)
+    @player = PlayerSprite.new @world
     @tile_map.add_child @player, 25
   end
 
   def load_enemies
     @enemies ||= Array.new
     @enemies << load_spider
+    load_goegulbeo
+  end
+
+  def load_goegulbeo
+    goegulbeo = GoegulbeoSprite.new @world
+    @tile_map.add_child goegulbeo, 15
   end
 
   def load_spider
