@@ -22,7 +22,8 @@ class GameLayer < Joybox::Core::Layer
 
   def load_tile_map
     @tile_map = TileMap.new file_name: 'demo.tmx'
-    self << @tile_map
+    self.add_child @tile_map, -1
+    #self << @tile_map
   end
 
   def load_background
@@ -41,18 +42,19 @@ class GameLayer < Joybox::Core::Layer
 
   def load_player
     @player = PlayerSprite.new @world
-    @tile_map.add_child @player, 25
+    @tile_map.add_child @player, 15
   end
 
   def load_enemies
     @enemies ||= Array.new
     @enemies << load_spider
-    load_goegulbeo
+    @enemies << load_goegulbeo
   end
 
   def load_goegulbeo
     goegulbeo = GoegulbeoSprite.new @world
     @tile_map.add_child goegulbeo, 15
+    goegulbeo
   end
 
   def load_spider
