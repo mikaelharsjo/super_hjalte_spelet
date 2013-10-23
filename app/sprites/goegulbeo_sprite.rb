@@ -2,7 +2,7 @@ class GoegulbeoSprite < Joybox::Physics::PhysicsSprite
 	def initialize(world)
 		@world = world
 	    @goegulbeo_body = @world.new_body(
-	      position: [500, 500],
+	      position: [2000, 500],
 	      type: Body::Dynamic,
 	      fixed_rotation: true
 	    ) do
