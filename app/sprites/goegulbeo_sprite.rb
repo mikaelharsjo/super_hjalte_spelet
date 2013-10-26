@@ -1,8 +1,8 @@
 class GoegulbeoSprite < Joybox::Physics::PhysicsSprite
-	def initialize(world)
+	def initialize(world, player)
 		@world = world
 	    @goegulbeo_body = @world.new_body(
-	      position: [2000, 500],
+	      position: [300, 500],
 	      type: Body::Dynamic,
 	      fixed_rotation: true
 	    ) do
@@ -14,5 +14,17 @@ class GoegulbeoSprite < Joybox::Physics::PhysicsSprite
 	    end
 		file_name = 'goegulbeo_sprite.png'
 		super file_name: file_name, body: @goegulbeo_body
+		player.add_observer(self)
+	end
+
+	def update(player_position)
+		p player_position
+	end
+
+	def jump
+    #if alive? && on_ground?
+		self.body.apply_force force:[40, 10]
+    #  @on_ground = false
+		SimpleAudioEngine.sharedEngine.playEffect 'jump.wav'
 	end
 end

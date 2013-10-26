@@ -2,6 +2,7 @@
 $:.unshift("/Library/RubyMotion/lib")
 require 'motion/project/template/ios'
 require 'joybox'
+require 'rubymotion-observer'
 
 Motion::Project::App.setup do |app|
   app.name = 'Superhjältespelet'
