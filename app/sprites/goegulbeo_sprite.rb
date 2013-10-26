@@ -19,11 +19,12 @@ class GoegulbeoSprite < Joybox::Physics::PhysicsSprite
 
 	def update(player_position)
 		p player_position
+		jump
 	end
 
 	def jump
     #if alive? && on_ground?
-		self.body.apply_force force:[40, 10]
+		self.body.apply_force force:[-40, -40]
     #  @on_ground = false
 		SimpleAudioEngine.sharedEngine.playEffect 'jump.wav'
 	end
