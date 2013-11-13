@@ -47,8 +47,8 @@ class GameLayer < Joybox::Core::Layer
 
   def load_enemies
     @enemies ||= Array.new
-    #@enemies << load_spider
-    @enemies << load_goegulbeo
+    # @enemies << load_spider
+    # @enemies << load_goegulbeo
   end
 
   def load_goegulbeo
@@ -103,10 +103,6 @@ class GameLayer < Joybox::Core::Layer
     y = [y, (@tile_map.mapSize.height * @tile_map.tileSize.height) - Screen.half_height].min
 
     viewPoint = Screen.center - [x, y].to_point
-    #p x
-    #if x > 100.0 and not @goegulbeo_is_loaded
-    #  load_goegulbeo
-    #end
     @tile_map.position = viewPoint
   end
 
