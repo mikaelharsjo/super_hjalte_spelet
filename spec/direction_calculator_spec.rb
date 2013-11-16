@@ -1,17 +1,8 @@
-# Simulates a CGPoint
-class CGPoint
-	attr_reader :x, :y
-
-	def initialize(x, y)
-		@x = x
-		@y = y
-	end
-end
-
-
-require_relative '../app/lib/direction_calculator'
 require_relative '../app/lib/direction'
+require_relative '../app/lib/direction_calculator'
+require_relative 'mocks'
 
+include Mocks
 include Direction
 
 describe DirectionCalculator do
