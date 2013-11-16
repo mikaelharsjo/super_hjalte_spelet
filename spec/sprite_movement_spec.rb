@@ -26,15 +26,21 @@ module SpriteMovement
 end
 
 class Enemy
-	attr_accessor :players_last_position
+	attr_accessor :players_last_position, :position, :body
 	def initialize player
-		# @player = player
+		@body = Body.new 0, 0
 		player.add_observer(self)
 	end
 
 	include SpriteMovement
 	def update position
 		@players_last_position = position
+		jump_right
+	end
+
+	def jump_right
+		@body.position.x = 1
+		@body.position.y = 1
 	end
 end
 
@@ -78,7 +84,11 @@ describe Enemy do
 		end
 
 		it 'should always move towards where it thinks the player is' do
-
+			# player starts north-east of enemy
+			enemy.body.position.should eq(CGPoint.new 0, 0)
+			player.moving
+			# enemy should jump right towards player
+			enemy.body.position.should eq(CGPoint.new 1, 1)
 		end
 	end
 end
