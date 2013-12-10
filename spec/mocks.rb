@@ -14,7 +14,7 @@ module Mocks
 	end
 
 	class Body
-		attr_reader :position
+		attr_accessor :position
 
 		def initialize(x, y)
 			@x = x
