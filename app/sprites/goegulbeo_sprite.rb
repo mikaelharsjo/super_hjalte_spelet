@@ -1,4 +1,6 @@
 class GoegulbeoSprite < Joybox::Physics::PhysicsSprite
+	include SpriteMovement
+	#include Direction
 	def initialize(world, player)
 		@world = world
 	    @goegulbeo_body = @world.new_body(

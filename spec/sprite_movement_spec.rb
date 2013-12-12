@@ -1,40 +1,13 @@
 require_relative '../app/lib/direction'
 require_relative '../app/lib/direction_calculator'
+require_relative '../app/lib/sprite_movement'
 require_relative 'mocks'
 require 'observer'
 
 include Mocks
 
-module SpriteMovement
-	def jump_up
-		p 'jumping up'
-		body.position.y += 1
-	end
-
-	def jump_right
-		p 'jumping right'
-		body.position.x += 1
-		body.position.y += 1
-	end
-
-	def jump_left
-		p 'jumping left'
-		body.position.x -= 1
-		body.position.y += 1		
-	end
-
-	def move_right
-	end
-
-	def move_left
-	end
-
-	def jump
-	end
-end
-
 class Enemy
-	attr_accessor :players_last_position, :position, :body
+	attr_accessor :position, :body
 	def initialize player
 		@body = Body.new 0, 0
 		player.add_observer(self)
@@ -44,7 +17,6 @@ class Enemy
 	include Direction
 
 	def update position
-		@players_last_position = position
 		direction = DirectionCalculator.direction body.position, position	
 		p "enemy position: #{body.position.x}, #{body.position.x}"
 		p "player position: #{position.x}, #{position.x}"
@@ -89,12 +61,6 @@ describe Enemy do
 		context 'observing the player position' do
 			it 'listens to player position changes' do
 				enemy.should respond_to :update
-			end
-
-			it 'can see you' do
-				enemy.players_last_position.should be_nil
-				player.moving
-				enemy.players_last_position.should_not be_nil
 			end
 		end
 
