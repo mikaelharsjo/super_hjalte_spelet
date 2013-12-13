@@ -4,7 +4,7 @@ class GoegulbeoSprite < Joybox::Physics::PhysicsSprite
 	def initialize(world, player)
 		@world = world
 	    @goegulbeo_body = @world.new_body(
-	      position: [300, 500],
+	      position: [300, 16*9],
 	      type: Body::Dynamic,
 	      fixed_rotation: true
 	    ) do
@@ -17,11 +17,13 @@ class GoegulbeoSprite < Joybox::Physics::PhysicsSprite
 		file_name = 'goegulbeo_sprite.png'
 		super file_name: file_name, body: @goegulbeo_body
 		player.add_observer(self)
-	end
+		# bounding_box.origin => x: 275.0, y: 121.75 hero.png
+		# bounding_box.size => width: 50.0, height: 44.5 hero.png
 
-	def update(player_position)
-		p player_position
-		jump
+		# bounding_box.origin => x: 175.0, y: 50.25 goegulbeo_sprite.png
+		# bounding_box.size => width: 250.0, height: 187.5 goegulbeo_sprite.png
+		p "bounding_box: #{bounding_box.origin.x}, #{bounding_box.origin.y}"
+		p "bounding_box: #{bounding_box.size.width}, #{bounding_box.size.height}"
 	end
 
 	def jump

@@ -1,6 +1,6 @@
 module SpriteMovement
 	include Direction
-	
+
 	def jump_up
 		p 'jumping up'
 		body.position.y += 1
@@ -8,11 +8,13 @@ module SpriteMovement
 
 	def jump_right
 		p 'jumping right'
+		self.body.apply_force force:[30, 30]
 		body.position.x += 1
 		body.position.y += 1
 	end
 
 	def jump_left
+		self.body.apply_force force:[-40, -40]
 		p 'jumping left'
 		body.position.x -= 1
 		body.position.y += 1		
@@ -29,8 +31,8 @@ module SpriteMovement
 
 	def update position
 		direction = DirectionCalculator.direction body.position, position	
-		p "enemy position: #{body.position.x}, #{body.position.x}"
-		p "player position: #{position.x}, #{position.x}"
+		p "enemy position: #{body.position.x}, #{body.position.y}"
+		p "player position: #{position.x}, #{position.y}"
 		p "direction: #{direction}"
 		move_towards direction
 	end
