@@ -69,6 +69,7 @@ class GameLayer < Joybox::Core::Layer
 
   def game_loop
     schedule_update do |delta|
+      @player.broadcastPositionToEnemies
       detect_enemy_collisions
       if @player.alive?
         @world.step delta: delta

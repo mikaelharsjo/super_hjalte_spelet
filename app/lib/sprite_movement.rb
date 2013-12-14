@@ -21,9 +21,13 @@ module SpriteMovement
 	end
 
 	def move_right
+		p 'moving right'
+		self.body.apply_force force:[20, 20]
 	end
 
 	def move_left
+		p 'moving left'
+		self.body.apply_force force:[-20, -20]
 	end
 
 	def jump
@@ -41,5 +45,7 @@ module SpriteMovement
 		return jump_up if direction == NORTH
 		return jump_right if direction == NORTH_EAST
 		return jump_left if direction == NORTH_WEST
+		return move_left if direction == WEST
+		return move_right if direction == EAST
 	end
 end

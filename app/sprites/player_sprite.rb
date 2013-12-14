@@ -6,7 +6,7 @@ class PlayerSprite < Joybox::Physics::PhysicsSprite
 	def initialize(world)
 		@world = world
 		@player_body = @world.new_body(
-			position: [16*1, 16*9],
+			position: [16*1, 35],
 			type: Body::Dynamic,
 			fixed_rotation: true
 		) do
@@ -19,6 +19,11 @@ class PlayerSprite < Joybox::Physics::PhysicsSprite
 		super file_name: 'hero.png', body: @player_body
 		@alive = true
 		@on_ground = true
+	end
+
+	def broadcastPositionToEnemies
+		changed
+		notify_observers(self.body.position)
 	end
 
 	def alive?
@@ -40,8 +45,7 @@ class PlayerSprite < Joybox::Physics::PhysicsSprite
 			self.body.apply_force force:[15, 50]
 			@on_ground = false
 			SimpleAudioEngine.sharedEngine.playEffect 'jump.wav'
-			changed
-			notify_observers(self.body.position)
+			broadcastPositionToEnemies
 		end
 	end
 

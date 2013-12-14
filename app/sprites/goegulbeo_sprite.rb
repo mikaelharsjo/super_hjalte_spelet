@@ -4,7 +4,7 @@ class GoegulbeoSprite < Joybox::Physics::PhysicsSprite
 	def initialize(world, player)
 		@world = world
 	    @goegulbeo_body = @world.new_body(
-	      position: [300, 16*9],
+	      position: [300, 35],
 	      type: Body::Dynamic,
 	      fixed_rotation: true
 	    ) do
@@ -14,8 +14,10 @@ class GoegulbeoSprite < Joybox::Physics::PhysicsSprite
 	        density: 1.0
 	      )
 	    end
-		file_name = 'goegulbeo_sprite.png'
+
+		file_name = 'hero.png'
 		super file_name: file_name, body: @goegulbeo_body
+
 		player.add_observer(self)
 		# bounding_box.origin => x: 275.0, y: 121.75 hero.png
 		# bounding_box.size => width: 50.0, height: 44.5 hero.png
@@ -24,12 +26,5 @@ class GoegulbeoSprite < Joybox::Physics::PhysicsSprite
 		# bounding_box.size => width: 250.0, height: 187.5 goegulbeo_sprite.png
 		p "bounding_box: #{bounding_box.origin.x}, #{bounding_box.origin.y}"
 		p "bounding_box: #{bounding_box.size.width}, #{bounding_box.size.height}"
-	end
-
-	def jump
-    #if alive? && on_ground?
-		self.body.apply_force force:[-40, -40]
-    #  @on_ground = false
-		SimpleAudioEngine.sharedEngine.playEffect 'jump.wav'
 	end
 end
