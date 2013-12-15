@@ -27,6 +27,10 @@ describe DirectionCalculator do
 	it 'south' do
 		get_direction(0, 1, 0, 0).should eq(SOUTH)
 	end
+
+	it 'set a west direction' do
+		get_direction(1, 0, 0, 0).should eq WEST
+	end
 end
 
 def get_direction(x1, y1, x2, y2)

@@ -8,6 +8,8 @@ class DirectionCalculator
 		to.x = to.x.to_i
 		to.y = to.y.to_i
 
+		return STILL if from.x == to.x and from.y == to.y
+
 		if from.y < to.y
 			if from.x < to.x
 				return NORTH_EAST
@@ -29,6 +31,8 @@ class DirectionCalculator
 				return WEST	
 			end
 		end
+
+		return WEST if from.x == to.y
 
 		STILL
 	end
