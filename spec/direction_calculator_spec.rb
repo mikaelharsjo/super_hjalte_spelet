@@ -6,30 +6,42 @@ include Mocks
 include Direction
 
 describe DirectionCalculator do
-	it 'stands still if on target' do
-		direction = get_direction 1, 1, 1, 1
-		direction.should eq(STILL)
-	end
+	describe '#direction' do
+		it 'stands still if on target' do
+			direction = get_direction 1, 1, 1, 1
+			direction.should eq(STILL)
+		end
 
-	it 'north' do
-		direction = get_direction 1, 0, 1, 1
-		direction.should eq(NORTH)
-	end
+		it 'goes north' do
+			direction = get_direction 1, 0, 1, 1
+			direction.should eq(NORTH)
+		end
 
-	it 'north east' do
-		get_direction(0, 0, 1, 1).should eq(NORTH_EAST)		
-	end
+		it 'goes north east' do
+			get_direction(0, 0, 1, 1).should eq(NORTH_EAST)		
+		end
 
-	it 'north west' do
-		get_direction(1, 0, 0, 1).should eq(NORTH_WEST)
-	end
+		it 'goes north west' do
+			get_direction(1, 0, 0, 1).should eq(NORTH_WEST)
+		end
 
-	it 'south' do
-		get_direction(0, 1, 0, 0).should eq(SOUTH)
-	end
+		it 'goes south' do
+			get_direction(0, 1, 0, 0).should eq(SOUTH)
+		end
 
-	it 'set a west direction' do
-		get_direction(1, 0, 0, 0).should eq WEST
+		it 'goes west' do
+			get_direction(1, 0, 0, 0).should eq WEST
+		end
+
+		it 'goes east' do
+			get_direction(0, 0, 1, 0).should eq EAST
+		end
+
+		context 'when close still find it (fuzzy)' do
+			it 'goes east' do
+				get_direction(0.4, 0.2, 1.1, 0.9).should eq EAST
+			end			
+		end
 	end
 end
 
