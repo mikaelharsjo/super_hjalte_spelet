@@ -1,4 +1,5 @@
 class GoegulbeoSprite < Joybox::Physics::PhysicsSprite
+	attr_accessor :sleep_count
 	include SpriteMovement
 	#include Direction
 	def initialize(world, player)
@@ -19,6 +20,8 @@ class GoegulbeoSprite < Joybox::Physics::PhysicsSprite
 		super file_name: file_name, body: @goegulbeo_body
 
 		player.add_observer(self)
+
+		@sleep_count = 10
 		# bounding_box.origin => x: 275.0, y: 121.75 hero.png
 		# bounding_box.size => width: 50.0, height: 44.5 hero.png
 

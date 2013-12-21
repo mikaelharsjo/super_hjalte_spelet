@@ -1,20 +1,23 @@
 module SpriteMovement
+	attr_accessor :sleep_count
+
 	include Direction
 
 	def jump_up
 		p 'jumping up'
+		self.body.apply_force force:[0, 20]
 		body.position.y += 1
 	end
 
 	def jump_right
 		p 'jumping right'
-		self.body.apply_force force:[30, 30]
+		self.body.apply_force force:[20, 20]
 		body.position.x += 1
 		body.position.y += 1
 	end
 
 	def jump_left
-		self.body.apply_force force:[-40, -40]
+		self.body.apply_force force:[-20, 20]
 		p 'jumping left'
 		body.position.x -= 1
 		body.position.y += 1		
@@ -27,10 +30,7 @@ module SpriteMovement
 
 	def move_left
 		p 'moving left'
-		self.body.apply_force force:[-20, -20]
-	end
-
-	def jump
+		self.body.apply_force force:[-20, 20]
 	end
 
 	def update position
@@ -38,7 +38,14 @@ module SpriteMovement
 		p "enemy position: #{body.position.x}, #{body.position.y}"
 		p "player position: #{position.x}, #{position.y}"
 		p "direction: #{direction}"
-		move_towards direction
+		if sleep_count == 0
+			p 'moving'
+			move_towards direction
+			@sleep_count = 10
+		else
+			@sleep_count = @sleep_count - 1
+			p 'sleeping'
+		end
 	end
 
 	def move_towards direction
