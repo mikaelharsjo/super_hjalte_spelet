@@ -7,10 +7,11 @@ require 'observer'
 include Mocks
 
 class Enemy
-	attr_accessor :position, :body
+	attr_accessor :position, :body, :sleep_count
 	def initialize player
 		@body = Body.new 0, 0
 		player.add_observer(self)
+		@sleep_count = 10
 	end
 
 	include SpriteMovement
@@ -38,7 +39,7 @@ describe Enemy do
 		it 'moves' do
 			enemy.should respond_to :jump_left
 			enemy.should respond_to :jump_right
-			enemy.should respond_to :jump
+			enemy.should respond_to :jump_up
 			enemy.should respond_to :move_left
 			enemy.should respond_to :move_right
 		end
