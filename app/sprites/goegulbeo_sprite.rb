@@ -16,7 +16,7 @@ class GoegulbeoSprite < Joybox::Physics::PhysicsSprite
 	      )
 	    end
 
-		file_name = 'hero.png'
+		file_name = 'v.png'
 		super file_name: file_name, body: @goegulbeo_body
 
 		player.add_observer(self)

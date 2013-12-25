@@ -40,7 +40,11 @@ describe DirectionCalculator do
 		context 'when close still find it (fuzzy)' do
 			it 'goes east' do
 				get_direction(0.4, 0.2, 1.1, 0.9).should eq EAST
-			end			
+			end	
+
+			it 'west' do
+				get_direction(153.365783691406, 39.1810150146484,  16.0, 35.0).should eq WEST
+			end		
 		end
 	end
 end
