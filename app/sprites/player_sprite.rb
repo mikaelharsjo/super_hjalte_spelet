@@ -42,7 +42,7 @@ class PlayerSprite < Joybox::Physics::PhysicsSprite
 
 	def jump
 		if alive? && on_ground?
-			self.body.apply_force force:[15, 50]
+			self.body.apply_force force:[50, 50]
 			@on_ground = false
 			SimpleAudioEngine.sharedEngine.playEffect 'jump.wav'
 			broadcastPositionToEnemies

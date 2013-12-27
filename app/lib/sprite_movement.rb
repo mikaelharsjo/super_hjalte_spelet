@@ -12,8 +12,6 @@ module SpriteMovement
 	def jump_right
 		p 'jumping right'
 		self.body.apply_force force:[15, 15]
-		body.position.x += 1
-		body.position.y += 1
 	end
 
 	def jump_left
