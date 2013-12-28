@@ -1,11 +1,11 @@
-class GoegulbeoSprite < Joybox::Physics::PhysicsSprite
+class VampireSprite < Joybox::Physics::PhysicsSprite
 	attr_accessor :sleep_count
 	include SpriteMovement
 	#include Direction
-	def initialize(world, player)
+	def initialize(world, player, initial_position)
 		@world = world
 	    @goegulbeo_body = @world.new_body(
-	      position: [300, 35],
+	      position: initial_position,
 	      type: Body::Dynamic,
 	      fixed_rotation: true
 	    ) do

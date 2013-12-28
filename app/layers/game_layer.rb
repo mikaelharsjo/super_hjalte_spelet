@@ -48,23 +48,14 @@ class GameLayer < Joybox::Core::Layer
   def load_enemies
     @enemies ||= Array.new
     # @enemies << load_spider
-    @enemies << load_goegulbeo
+    load_vampire_at [300, 35]
+    load_vampire_at [400, 35]
   end
 
-  def load_goegulbeo
-    goegulbeo = GoegulbeoSprite.new @world, @player
-    @tile_map.add_child goegulbeo, 15
-    @enemies << goegulbeo
-    #@goegulbeo_is_loaded = true
-    goegulbeo
-  end
-
-  def load_spider
-    spider = SpiderSprite.new
-    @tile_map.add_child spider, 15
-    end_position = [0, 30]
-    spider.run_action Move.to position: end_position, duration: 5.0
-    spider
+  def load_vampire_at position
+    vampire = VampireSprite.new @world, @player, position
+    @tile_map.add_child vampire, 15
+    @enemies << vampire
   end
 
   def game_loop
