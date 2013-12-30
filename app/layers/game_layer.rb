@@ -48,8 +48,8 @@ class GameLayer < Joybox::Core::Layer
   def load_enemies
     @enemies ||= Array.new
     # @enemies << load_spider
-    load_vampire_at [300, 35]
-    load_vampire_at [400, 35]
+    #load_vampire_at [300, 35]
+    #load_vampire_at [400, 35]
   end
 
   def load_vampire_at position
@@ -64,7 +64,7 @@ class GameLayer < Joybox::Core::Layer
       detect_enemy_collisions
       if @player.alive?
         @world.step delta: delta
-        @player.move_forward if @moving
+        @player.move_forward
         set_viewpoint_center(@player.position)
       else
         game_over
@@ -78,12 +78,6 @@ class GameLayer < Joybox::Core::Layer
         #location = touch.locationInView(touch.view)
         #location.x > (Screen.width / 2) ? (@moving = true) : @player.jump
         player.jump
-      end
-    end
-
-    on_touches_ended do |touches, event|
-      touches.each do |touch|
-        @moving = false
       end
     end
   end

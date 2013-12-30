@@ -1,21 +1,14 @@
 class PlayerSprite < Joybox::Physics::PhysicsSprite
+	MAXIMUM_VELOCITY = 8
 	attr_accessor :on_ground
 
 	include Observable
 
 	def initialize(world)
-		@world = world
-		@player_body = @world.new_body(
-			position: [16*1, 35],
-			type: Body::Dynamic,
-			fixed_rotation: true
-		) do
-			polygon_fixture(
-				box: [18 / 4, 60 / 4],
-				friction: 0.7,
-				density: 1.0
-			)
+		@player_body = world.new_body position: [16*1, 35], type: Body::Dynamic, fixed_rotation: true do
+			polygon_fixture box: [18 / 4, 60 / 4], friction: 0.7, density: 1.0
 		end
+
 		super file_name: 'hero.png', body: @player_body
 		@alive = true
 		@on_ground = true
@@ -35,8 +28,9 @@ class PlayerSprite < Joybox::Physics::PhysicsSprite
 	end
 
 	def move_forward
-		if alive?
-			self.body.apply_force force:[5, 0], as_impulse: true
+		p "self.body.linear_velocity: #{self.body.linear_velocity.x}, #{self.body.linear_velocity.y}"
+		if alive? and self.body.linear_velocity.x < MAXIMUM_VELOCITY
+			self.body.apply_force force:[3, 0], as_impulse: true
 		end
 	end
 
@@ -59,5 +53,4 @@ class PlayerSprite < Joybox::Physics::PhysicsSprite
 	def above_ground?
 		@player_body.position.y > 0
 	end
-
 end
