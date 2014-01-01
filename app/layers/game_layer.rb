@@ -74,11 +74,17 @@ class GameLayer < Joybox::Core::Layer
 
   def configure_controls
     on_touches_began do |touches, event|
-      touches.each do |touch|
-        #location = touch.locationInView(touch.view)
-        #location.x > (Screen.width / 2) ? (@moving = true) : @player.jump
-        player.jump
-      end
+      p "touches.any_object.location.inspect: #{touches.any_object.location.inspect}"
+      location = touches.any_object.location
+      p "@player.bounding_box: #{@player.bounding_box.inspect}"
+      p "player: #{@player.body.position.inspect}"
+      p "player.body.fixtures.length: #{@player.body.fixtures.length}"
+      p "player.body.fixtures.first.friction: #{@player.body.fixtures.first.friction}"
+      p "player.body.fixtures.first.restitution: #{@player.body.fixtures.first.restitution}"
+      p "player.body.fixtures.first.density: #{@player.body.fixtures.first.density}"
+      #p "player.body.fixtures.first.inspect: #{@player.body.fixtures.first.inspect}"
+      #p "player.body.fixtures.first.shape.inspect: #{@player.body.fixtures.first.shape.inspect}"
+      @player.jump if CGRectContainsPoint @player.bounding_box, location
     end
   end
 
