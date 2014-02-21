@@ -48,8 +48,8 @@ class GameLayer < Joybox::Core::Layer
   def load_enemies
     @enemies ||= Array.new
     # @enemies << load_spider
-    #load_vampire_at [300, 35]
-    #load_vampire_at [400, 35]
+    load_vampire_at [300, 35]
+    load_vampire_at [400, 35]
   end
 
   def load_vampire_at position
@@ -65,7 +65,8 @@ class GameLayer < Joybox::Core::Layer
       if @player.alive?
         @world.step delta: delta
         @player.move_forward
-        set_viewpoint_center(@player.position)
+        #
+        #set_viewpoint_center(@player.position)
       else
         game_over
       end
@@ -74,17 +75,15 @@ class GameLayer < Joybox::Core::Layer
 
   def configure_controls
     on_touches_began do |touches, event|
-      p "touches.any_object.location.inspect: #{touches.any_object.location.inspect}"
+      # p "touches.any_object.location.inspect: #{touches.any_object.location.inspect}"
       location = touches.any_object.location
-      p "@player.bounding_box: #{@player.bounding_box.inspect}"
-      p "player: #{@player.body.position.inspect}"
-      p "player.body.fixtures.length: #{@player.body.fixtures.length}"
-      p "player.body.fixtures.first.friction: #{@player.body.fixtures.first.friction}"
-      p "player.body.fixtures.first.restitution: #{@player.body.fixtures.first.restitution}"
-      p "player.body.fixtures.first.density: #{@player.body.fixtures.first.density}"
-      #p "player.body.fixtures.first.inspect: #{@player.body.fixtures.first.inspect}"
-      #p "player.body.fixtures.first.shape.inspect: #{@player.body.fixtures.first.shape.inspect}"
+      # p "player.bounding_box: #{@player.bounding_box.inspect}"
+      # p "player.body.position: #{@player.body.position.inspect}"
+      # p "player.body.fixtures.first.shape.inspect: #{@player.body.fixtures.first.shape.inspect}"
       @player.jump if CGRectContainsPoint @player.bounding_box, location
+      @enemies.each do |enemy|
+        enemy.hurt if CGRectContainsPoint enemy.bounding_box, location
+      end
     end
   end
 
