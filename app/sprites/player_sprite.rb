@@ -1,21 +1,22 @@
 class PlayerSprite < Joybox::Physics::PhysicsSprite
-	MAXIMUM_CONSTANT_VELOCITY = 8
+	MAXIMUM_CONSTANT_VELOCITY = 7
 	attr_accessor :on_ground#
 
 	include Observable
 
 	def initialize(world)
-		@player_body = world.new_body(position: [16*1, 16*2], 
+		@player_body = world.new_body(position: [50, 30], 
 			type: Body::Dynamic, 
 			fixed_rotation: true
 		) do
 			polygon_fixture box: [18 / 4, 60 / 4], 
-							friction: 0.7, 
+							friction: 0.9, 
 							density: 1.0
 		end
 
 		super file_name: 'hero.png', body: @player_body
 		@alive = true
+		p body.position.y
 		@on_ground = true
 	end
 
@@ -34,14 +35,13 @@ class PlayerSprite < Joybox::Physics::PhysicsSprite
 
 	def move_forward
 		if alive? and self.body.linear_velocity.x < MAXIMUM_CONSTANT_VELOCITY
-			self.body.apply_force force:[2, 2]
+			self.body.apply_force force:[10, 0]
 		end
 	end
 
 	def jump
 		if alive? && on_ground?
-			# p self.body.inspect()
-			self.body.apply_force force:[50, 50]
+			self.body.apply_force force:[10, 50]
 			@on_ground = false
 			SimpleAudioEngine.sharedEngine.playEffect 'jump.wav'
 			broadcastPositionToEnemies

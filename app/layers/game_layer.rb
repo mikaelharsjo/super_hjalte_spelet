@@ -47,7 +47,6 @@ class GameLayer < Joybox::Core::Layer
 
   def load_enemies
     @enemies ||= Array.new
-    # @enemies << load_spider
     load_vampire_at [300, 35]
     load_vampire_at [400, 35]
   end

@@ -1,5 +1,4 @@
 module SpriteMovement
-	#attr_accessor :sleep_count
 
 	include Direction
 

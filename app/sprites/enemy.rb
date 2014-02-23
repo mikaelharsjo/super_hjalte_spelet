@@ -3,6 +3,7 @@ class Enemy < Joybox::Physics::PhysicsSprite
 		@lifes -= 1
 		if @lifes == 0
 			@world.destroy_body @body
+			die
 			removeFromParentAndCleanup true
 		end
 	end
@@ -12,7 +13,7 @@ class Enemy < Joybox::Physics::PhysicsSprite
 		self.run_action Blink.with times:50
 		SimpleAudioEngine.sharedEngine.playEffect 'hurt.wav'
 		SimpleAudioEngine.sharedEngine.pauseBackgroundMusic
-		changed
-		notify_observers(self.body.position)
+		# changed
+		# notify_observers(self.body.position)
 	end
 end

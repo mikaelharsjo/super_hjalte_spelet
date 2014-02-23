@@ -2,9 +2,8 @@ class VampireSprite < Enemy
 	attr_accessor :sleep_count
 	include SpriteMovement
 
-	#include Direction
 	def initialize(world, player, initial_position)
-		@lifes = 3
+		@lifes = 2
 		@world = world
 	    @body = @world.new_body(
 	      position: initial_position,
