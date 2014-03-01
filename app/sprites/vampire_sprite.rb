@@ -3,6 +3,7 @@ class VampireSprite < Enemy
 	include SpriteMovement
 
 	def initialize(world, player, initial_position)
+		@facing_left = true
 		@lifes = 2
 		@world = world
 	    @body = @world.new_body(
