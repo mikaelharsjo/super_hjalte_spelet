@@ -1,7 +1,7 @@
 class GameLayer < Joybox::Core::Layer
   include Joybox::TMX
 
-  attr_reader :player
+  attr_reader :player, :xOffset
 
   scene
 
@@ -33,6 +33,7 @@ class GameLayer < Joybox::Core::Layer
 
   def initialize_world
     @world = World.new(gravity: [0, -9.8])
+    @xOffset = 0
   end
 
   def create_fixtures
@@ -47,8 +48,8 @@ class GameLayer < Joybox::Core::Layer
 
   def load_enemies
     @enemies ||= Array.new
-    load_vampire_at [300, 35]
-    load_vampire_at [400, 35]
+    load_vampire_at [350, 35]
+    load_vampire_at [450, 35]
   end
 
   def load_vampire_at position
@@ -64,8 +65,7 @@ class GameLayer < Joybox::Core::Layer
       if @player.alive?
         @world.step delta: delta
         @player.move_forward
-        #
-        #set_viewpoint_center(@player.position)
+        set_viewpoint_center(@player.body.position)
       else
         game_over
       end
@@ -76,9 +76,10 @@ class GameLayer < Joybox::Core::Layer
     on_touches_began do |touches, event|
       # p "touches.any_object.location.inspect: #{touches.any_object.location.inspect}"
       location = touches.any_object.location
-      # p "player.bounding_box: #{@player.bounding_box.inspect}"
+      #p "player.bounding_box: #{@player.bounding_box.inspect}"
       # p "player.body.position: #{@player.body.position.inspect}"
       # p "player.body.fixtures.first.shape.inspect: #{@player.body.fixtures.first.shape.inspect}"
+      location.x = location.x + @xOffset
       @player.jump if CGRectContainsPoint @player.bounding_box, location
       @enemies.each do |enemy|
         enemy.hurt if CGRectContainsPoint enemy.bounding_box, location
@@ -93,6 +94,7 @@ class GameLayer < Joybox::Core::Layer
     y = [y, (@tile_map.mapSize.height * @tile_map.tileSize.height) - Screen.half_height].min
 
     viewPoint = Screen.center - [x, y].to_point
+    @xOffset += (viewPoint.x - @tile_map.position.x).abs
     @tile_map.position = viewPoint
   end
 
