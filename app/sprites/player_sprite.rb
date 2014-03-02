@@ -40,7 +40,7 @@ class PlayerSprite < Joybox::Physics::PhysicsSprite
 
 	def jump
 		if alive? && on_ground?
-			self.body.apply_force force:[10, 50]
+			self.body.apply_force force:[15, 40]
 			@on_ground = false
 			SimpleAudioEngine.sharedEngine.playEffect 'jump.wav'
 			broadcastPositionToEnemies
@@ -50,7 +50,7 @@ class PlayerSprite < Joybox::Physics::PhysicsSprite
 	def die
 		@alive = false
 		self.run_action Blink.with times:50
-		SimpleAudioEngine.sharedEngine.playEffect 'hurt.wav'
+		SimpleAudioEngine.sharedEngine.playEffect 'sounds/game_over.wav'
 		SimpleAudioEngine.sharedEngine.pauseBackgroundMusic
 	end
 
