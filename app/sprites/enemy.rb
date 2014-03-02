@@ -1,5 +1,6 @@
 class Enemy < Joybox::Physics::PhysicsSprite
 	def hurt
+		SimpleAudioEngine.sharedEngine.playEffect 'sounds/grunt.wav'
 		@lifes -= 1
 		if @lifes == 0
 			@world.destroy_body @body
@@ -11,9 +12,7 @@ class Enemy < Joybox::Physics::PhysicsSprite
 	def die
 		@alive = false
 		self.run_action Blink.with times:50
-		SimpleAudioEngine.sharedEngine.playEffect 'hurt.wav'
-		SimpleAudioEngine.sharedEngine.pauseBackgroundMusic
-		# changed
-		# notify_observers(self.body.position)
+		#SimpleAudioEngine.sharedEngine.playEffect 'sounds/grunt.wav'
+		#SimpleAudioEngine.sharedEngine.pauseBackgroundMusic
 	end
 end
