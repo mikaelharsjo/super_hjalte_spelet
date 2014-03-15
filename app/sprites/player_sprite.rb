@@ -9,12 +9,12 @@ class PlayerSprite < Joybox::Physics::PhysicsSprite
 			type: Body::Dynamic, 
 			fixed_rotation: true
 		) do
-			polygon_fixture box: [18 / 4, 60 / 4], 
+			polygon_fixture box: [18 / 4, 60 / 4],
 							friction: 0.9, 
 							density: 1.0
 		end
 
-		super file_name: 'hero.png', body: @player_body
+		super frame_name: 'hero.png', body: @player_body
 		@alive = true
 		@on_ground = true
 	end
@@ -40,7 +40,7 @@ class PlayerSprite < Joybox::Physics::PhysicsSprite
 
 	def jump
 		if alive? && on_ground?
-			self.body.apply_force force:[15, 40]
+			self.body.apply_force force:[15, 65]
 			@on_ground = false
 			SimpleAudioEngine.sharedEngine.playEffect 'jump.wav'
 			broadcastPositionToEnemies

@@ -6,6 +6,12 @@ class GameLayer < Joybox::Core::Layer
   scene
 
   def on_enter
+    SpriteFrameCache.frames.add file_name: "graphics/sprites.plist"
+    @sprite_batch = SpriteBatch.new file_name: "graphics/sprites.png"
+    self << @sprite_batch
+
+    #@sprite_batch << Sprite.new(frame_name: 'boy.png', position: [Screen.half_width, Screen.half_height])
+    
     initialize_world
     load_background
     load_tile_map
@@ -48,8 +54,22 @@ class GameLayer < Joybox::Core::Layer
 
   def load_enemies
     @enemies ||= Array.new
-    load_vampire_at [350, 35]
-    load_vampire_at [450, 35]
+    load_vampire_at [1850, 35]
+    load_vampire_at [1450, 35]
+    load_goegulbeo
+    load_ajaj_moster
+  end
+
+  def load_goegulbeo
+    goegulbeo = GoegulbeoSprite.new @world, @player, [2450, 105]
+    @tile_map.add_child goegulbeo, 15
+    @enemies << goegulbeo
+  end
+
+  def load_ajaj_moster
+    enemy = AjajMonsterSprite.new @world, @player, [450, 105]
+    @tile_map.add_child enemy, 15
+    @enemies << enemy
   end
 
   def load_vampire_at position

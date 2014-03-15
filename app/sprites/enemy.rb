@@ -1,4 +1,12 @@
 class Enemy < Joybox::Physics::PhysicsSprite
+	attr_accessor :sleep_count
+	# defaults
+	def initialize
+		@lifes = 1
+		@facing_left = true
+		@sleep_count = 10
+	end
+
 	def hurt
 		SimpleAudioEngine.sharedEngine.playEffect 'sounds/grunt.wav'
 		@lifes -= 1

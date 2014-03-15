@@ -1,4 +1,4 @@
-class VampireSprite < Enemy
+class AjajMonsterSprite < Enemy
 	include SpriteMovement
 
 	def initialize(world, player, initial_position)
@@ -17,7 +17,8 @@ class VampireSprite < Enemy
 			)
 		end
 
-		super frame_name: 'vampire_sprite.png', body: @body
+		file_name = 'ajaj_monster.png'
+		super frame_name: file_name, body: @body
 
 		player.add_observer(self)
 	end
