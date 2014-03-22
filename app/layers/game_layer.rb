@@ -54,10 +54,10 @@ class GameLayer < Joybox::Core::Layer
 
   def load_enemies
     @enemies ||= Array.new
-    load_vampire_at [1850, 35]
-    load_vampire_at [1450, 35]
-    load_goegulbeo
-    load_ajaj_moster
+    #load_vampire_at [1850, 35]
+    #load_vampire_at [1450, 35]
+    #load_goegulbeo
+    #load_ajaj_moster
   end
 
   def load_goegulbeo
@@ -100,7 +100,8 @@ class GameLayer < Joybox::Core::Layer
       # p "player.body.position: #{@player.body.position.inspect}"
       # p "player.body.fixtures.first.shape.inspect: #{@player.body.fixtures.first.shape.inspect}"
       location.x = location.x + @xOffset
-      @player.jump if CGRectContainsPoint @player.bounding_box, location
+      player_rect = CGRectInset(@player.bounding_box, -20, -20)
+      @player.jump if CGRectContainsPoint player_rect, location
       @enemies.each do |enemy|
         enemy.hurt if CGRectContainsPoint enemy.bounding_box, location
       end
@@ -121,6 +122,7 @@ class GameLayer < Joybox::Core::Layer
   def detect_collisions
     @world.when_collide @player do |collision_sprite, is_touching|
       @player.on_ground = true
+      #p 'on_ground'
       #@player.die if @hazard_tiles.include?(collision_sprite)
     end
   end
